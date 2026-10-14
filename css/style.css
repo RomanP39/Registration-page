@@ -1,0 +1,217 @@
+:root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #00ff41;
+            --bg-dark: #0a0a12;
+            --glass: rgba(255, 255, 255, 0.05);
+            --error: #ff3333;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Контейнер формы */
+        .form-container {
+            background: var(--glass);
+            padding: 2.5rem;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            border-radius: 10px;
+            width: 400px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            transition: opacity 0.5s ease;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-top: 0;
+            letter-spacing: 2px;
+        }
+
+        /* Поля ввода */
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            border-bottom: 2px solid var(--neon-blue);
+            color: #fff;
+            padding: 10px;
+            box-sizing: border-box; /* Важно для padding */
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus {
+            border-bottom-color: var(--neon-pink);
+            box-shadow: 0 5px 15px -5px var(--neon-pink);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Сообщения об ошибках */
+        .error-msg {
+            color: var(--error);
+            font-size: 0.75rem;
+            height: 1rem;
+            opacity: 0;
+            transition: 0.3s;
+            position: absolute;
+            bottom: -20px;
+            right: 0;
+        }
+        .error-msg.visible {
+            opacity: 1;
+        }
+
+        /* Выбор аватара */
+        .avatar-selection {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .avatar-option {
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            padding: 5px;
+            transition: 0.3s;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .avatar-option:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Скрытый радиобаттон, стилизуем лейбл */
+        input[type="radio"] {
+            display: none;
+        }
+
+        input[type="radio"]:checked + .avatar-option {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+            transform: scale(1.1);
+        }
+
+        /* Превью аватара */
+        .avatar-preview {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            height: 60px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .avatar-preview.pop {
+            transform: scale(1.3);
+        }
+
+        /* Кнопка */
+        button {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-family: inherit;
+        }
+
+        button:hover:not(:disabled) {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        button:disabled {
+            border-color: #555;
+            color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Экран успеха */
+        .success-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .success-screen.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .success-screen h1 {
+            color: var(--neon-green);
+            font-size: 3rem;
+            text-shadow: 0 0 20px var(--neon-green);
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+            25% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
+            50% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+            75% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
+            100% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+        }
+
+        /* Анимация тряски для ошибки */
+        .shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
